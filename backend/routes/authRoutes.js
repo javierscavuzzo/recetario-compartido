@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const { loginUser } = require('../controllers/authController');
 
-// Aquí definís tus endpoints, ejemplo:
-router.post('/login', (req, res) => {
-    // lógica de login
-    res.send('Login OK');
-});
+// Ruta para login (usa el controlador real)
+router.post('/login', loginUser);
 
+// Ruta de ejemplo para registro (si todavía no tenés un controlador real)
 router.post('/register', (req, res) => {
-    // lógica de registro
     res.send('Registro OK');
 });
 
