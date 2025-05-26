@@ -5,6 +5,7 @@ import App from './App.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import RecipeForm from "./pages/RecipeForm.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -14,6 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/recipes/create" element={<RecipeForm />} />
+        <Route path="/recipes/edit/:id" element={<RecipeForm />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

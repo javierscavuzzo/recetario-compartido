@@ -13,7 +13,7 @@ const Login = () => {
         password,
       });
       console.log(res.data);
-      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token", res.data.token); //Guardar token
       alert('Login exitoso');
     } catch (err) {
       console.error(err);
