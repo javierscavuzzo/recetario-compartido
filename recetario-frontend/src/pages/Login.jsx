@@ -13,6 +13,7 @@ const Login = () => {
         password,
       });
       console.log(res.data);
+      localStorage.setItem("token", res.data.token);
       alert('Login exitoso');
     } catch (err) {
       console.error(err);
