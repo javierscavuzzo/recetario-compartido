@@ -18,6 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<Dashboard />} />
         <Route path="/recipes/create" element={<RecipeForm />} />
         <Route path="/recipes/edit/:id" element={<RecipeForm />} />
+        <Route path="/recipe-form" element={<RecipeForm />} />
+        <Route path="/recipe-form/:id" element={<RecipeForm />} />
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

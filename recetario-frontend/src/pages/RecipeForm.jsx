@@ -1,64 +1,70 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import './RecipeForm.css';
 
 const RecipeForm = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const { id } = useParams(); // Si hay ID, es edición
+  const [titulo, setTitulo] = useState('');
+  const [descripcion, setDescripcion] = useState('');
   const navigate = useNavigate();
+  const { id } = useParams(); // Si hay ID, estamos editando
 
   useEffect(() => {
     if (id) {
       axios.get(`http://localhost:3000/api/recipes/${id}`)
-        .then(res => {
-          setTitle(res.data.title);
-          setDescription(res.data.description);
+        .then((res) => {
+          setTitulo(res.data.titulo);
+          setDescripcion(res.data.descripcion);
         })
-        .catch(err => console.error('Error al cargar receta:', err));
+        .catch((err) => {
+          console.error('Error al obtener la receta:', err);
+          alert('No se pudo cargar la receta');
+        });
     }
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+
+    const receta = { titulo, descripcion };
 
     try {
       if (id) {
-        await axios.put(`http://localhost:3000/api/recipes/${id}`, { title, description }, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        alert('Receta actualizada');
+        await axios.put(`http://localhost:3000/api/recipes/${id}`, receta);
+        alert('Receta actualizada correctamente');
       } else {
-        await axios.post('http://localhost:3000/api/recipes', { title, description }, {
-          headers: { Authorization: `Bearer ${token}` },
+        await axios.post('http://localhost:3000/api/recipes', receta, {
+          headers: {
+            Authorization: 'Bearer TU_TOKEN_AQUI' // Si usás auth, remplaza por token válido
+          }
         });
-        alert('Receta creada');
+        alert('Receta creada correctamente');
       }
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
-      console.error('Error al guardar receta:', err);
-      alert('Error: asegúrate de estar autenticado');
+      console.error('Error al guardar la receta:', err);
+      alert('Hubo un error al guardar la receta');
     }
   };
 
   return (
-    <div>
+    <div className="recipe-form-container">
       <h2>{id ? 'Editar Receta' : 'Crear Receta'}</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Título"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={titulo}
+          onChange={(e) => setTitulo(e.target.value)}
           required
-        /><br />
+        />
         <textarea
           placeholder="Descripción"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          rows="5"
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
           required
-        /><br />
+        ></textarea>
         <button type="submit">{id ? 'Actualizar' : 'Crear'}</button>
       </form>
     </div>
