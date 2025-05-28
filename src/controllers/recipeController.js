@@ -1,9 +1,15 @@
 const Recipe = require('../models/Recipe');
 
-//Crear una nueva receta
-exports.createRecipe = async (req, res) => {
+// Crear una nueva receta
+const createRecipe = async (req, res) => {
     try {
         const { title, ingredients, instructions, createdBy } = req.body;
+
+        if (!title || !ingredients || !instructions || !createdBy) {
+            return res
+                .status(400)
+                .json({ error: 'Todos los campos son obligatorios' });
+        }
 
         const recipe = new Recipe({
             title,
@@ -15,13 +21,14 @@ exports.createRecipe = async (req, res) => {
 
         res.status(201).json(recipe);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(500).json({
+            error: 'Error al crear la receta: ' + error.message,
+        });
     }
 };
 
-//Obtener todas las recetas
-
-exports.getRecipes = async (req, res) => {
+// Obtener todas las recetas
+const getRecipes = async (req, res) => {
     try {
         const recipes = await Recipe.find().populate('createdBy', 'name email');
         res.json(recipes);
@@ -30,51 +37,8 @@ exports.getRecipes = async (req, res) => {
     }
 };
 
-// Obtener una receta por ID
-const getRecipeById = async (req, res) => {
-    try {
-        const recipe = await Recipe.findById(req.params.id);
-        if (!recipe) {
-            return res.status(404).json({ message: 'Receta no encontrada' });
-        }
-        res.status(200).json(recipe);
-    } catch (error) {
-        res.status(500).json({ message: 'Error al obtener la receta' });
-    }
-};
-
-// Actualizar receta
-const updateRecipe = async (req, res) => {
-    try {
-        const recipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-        });
-        if (!recipe) {
-            return res.status(404).json({ message: 'Receta no encontrada' });
-        }
-        res.status(200).json(recipe);
-    } catch (error) {
-        res.status(500).json({ message: 'Error al actualizar la receta' });
-    }
-};
-
-// Eliminar receta
-const deleteRecipe = async (req, res) => {
-    try {
-        const recipe = await Recipe.findByIdAndDelete(req.params.id);
-        if (!recipe) {
-            return res.status(404).json({ message: 'Receta no encontrada' });
-        }
-        res.status(200).json({ message: 'Receta eliminada correctamente' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error al eliminar la receta' });
-    }
-};
-
+// Exportar todas las funciones
 module.exports = {
     createRecipe,
-    getAllRecipes,
-    getRecipeById,
-    updateRecipe,
-    deleteRecipe,
+    getRecipes,
 };
