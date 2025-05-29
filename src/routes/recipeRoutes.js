@@ -1,13 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware');
-const {
-    createRecipe,
-    getAllRecipes,
-    getRecipeById,
-    updateRecipe,
-    deleteRecipe,
-} = require('../controllers/recipeController');
+const recipeController = require('../controllers/recipeController');
+const auth = require('../middleware/auth');
 
 // Crear receta (requiere login)
 router.post('/', authMiddleware, createRecipe);
@@ -19,7 +13,7 @@ router.get('/', getAllRecipes);
 router.get('/:id', getRecipeById);
 
 // Actualizar receta (requiere login)
-router.put('/:id', updateRecipe);
+router.put('/:id', auth, recipeController.updateRecipe);
 
 // Eliminar receta (requiere login)
 router.delete('/:id', deleteRecipe);

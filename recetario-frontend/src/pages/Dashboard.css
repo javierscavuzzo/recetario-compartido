@@ -1,17 +1,30 @@
 .dashboard-container {
   max-width: 800px;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 2rem;
+  font-family: sans-serif;
 }
 
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.recipe-form input,
+.recipe-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.dashboard-header h2 {
-  margin: 0;
+.recipe-form button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.recipe-form button:hover {
+  background-color: #0056b3;
 }
 
 .recipe-list {
@@ -19,31 +32,38 @@
 }
 
 .recipe-card {
-  border: 1px solid #ddd;
+  background-color: #f7f7f7;
   padding: 1rem;
-  margin-bottom: 1rem;
   border-radius: 8px;
-  background-color: #fafafa;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .recipe-card h3 {
-  margin-top: 0;
+  margin: 0 0 0.5rem 0;
+}
+
+.recipe-card ul {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
 }
 
 .recipe-card button {
-  margin-right: 1rem;
-  padding: 0.4rem 0.8rem;
+  margin-right: 0.5rem;
+  background: #dc3545;
+  color: white;
   border: none;
-  border-radius: 5px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.recipe-card .edit-btn {
-  background-color: #ffc107;
-  color: #212529;
+.recipe-card button:hover {
+  background: #c82333;
 }
 
-.recipe-card .delete-btn {
-  background-color: #dc3545;
-  color: white;
+.recipe-card .creator {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.5rem;
 }
