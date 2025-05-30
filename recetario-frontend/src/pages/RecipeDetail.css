@@ -1,0 +1,13 @@
+/* src/pages/RecipeDetail.css */
+.recipe-detail {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.recipe-detail h2 {
+  margin-bottom: 1rem;
+}

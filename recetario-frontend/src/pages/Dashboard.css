@@ -1,69 +1,90 @@
 .dashboard-container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: auto;
   padding: 2rem;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+.recipe-form,
+.recipe-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #f5f7fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 
 .recipe-form input,
-.recipe-form textarea {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+.recipe-form textarea,
+.recipe-card form input,
+.recipe-card form textarea {
+  padding: 0.8rem;
+  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.recipe-form button {
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  border: none;
+.recipe-form button,
+.recipe-card button {
+  padding: 0.6rem 1.2rem;
+  background-color: #3498db;
   color: white;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
 }
 
-.recipe-form button:hover {
-  background-color: #0056b3;
+.recipe-form button:hover,
+.recipe-card button:hover {
+  background-color: #2980b9;
 }
 
 .recipe-list {
-  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
 .recipe-card {
-  background-color: #f7f7f7;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.recipe-card:hover {
+  transform: scale(1.02);
 }
 
 .recipe-card h3 {
-  margin: 0 0 0.5rem 0;
+  margin: 0;
+  color: #2c3e50;
+}
+
+.recipe-card p,
+.recipe-card ul {
+  margin: 0.5rem 0;
+  color: #34495e;
 }
 
 .recipe-card ul {
-  padding-left: 1rem;
-  margin-top: 0.5rem;
+  list-style-type: none;
+  padding: 0;
 }
 
-.recipe-card button {
-  margin-right: 0.5rem;
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.recipe-card button:hover {
-  background: #c82333;
-}
-
-.recipe-card .creator {
-  font-size: 0.85rem;
-  color: #555;
-  margin-top: 0.5rem;
+.creator {
+  font-size: 0.9rem;
+  color: #888;
 }
